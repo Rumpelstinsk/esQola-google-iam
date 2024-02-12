@@ -1,9 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
-from backend.db import UserRepository
-from backend.entities import LoginData
+from db import UserRepository
+from entities import LoginData
 
 app = FastAPI()
+
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/login")
@@ -12,4 +22,3 @@ async def post_login(data: LoginData):
         return UserRepository().get(email=data.user, password=data.password)
     except Exception:
         raise HTTPException(status_code=404, detail="Item not found")
-
