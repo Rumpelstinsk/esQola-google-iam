@@ -4,16 +4,14 @@ USERS = {
     "jaime.f@landbot.io": {
         "id": 1,
         "password": "test",
-        "name": "Jaime"
+        "name": "JaimeF"
     }
 }
 
 
 class UserRepository:
     def get(self, email: str, password: str):
-        print("llego aqui")
         user = USERS.get(email)
-        print(user)
         if user is None:
             raise Exception("User not found")
 
