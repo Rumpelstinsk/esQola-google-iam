@@ -10,7 +10,7 @@ USERS = {
 
 
 class UserRepository:
-    def get(self, email: str, password: str):
+    def get(self, email: str, password: str) -> User:
         user = USERS.get(email)
         if user is None:
             raise Exception("User not found")

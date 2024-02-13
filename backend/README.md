@@ -1,1 +1,2 @@
 - `uvicorn main:app --reload` --> Run fastapi
+- `source env/bin/activate` --> Active virtual env locally

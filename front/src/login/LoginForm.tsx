@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "./useLogin";
-
-import { isErrorResponse } from "../repositories";
+import { isErrorResponse } from "../models/responses";
 import { useUser } from "../contexts/UserContext";
 
 export const LoginForm = () => {

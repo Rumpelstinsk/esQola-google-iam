@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 import { User } from "../models/user";
+import { useCookies } from "react-cookie";
+import { TOKEN_COOKIE_NAME } from "../constants";
 
 interface IUserContext {
   user: User | null;
@@ -27,6 +29,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
 export const useUser = () => {
   const userContext = useContext(UserContext);
+  const [cookie, setCookies, removeCookie] = useCookies();
   if (!userContext) {
     throw new Error("useUser should be wrapped inside a UserProvider");
   }
@@ -41,8 +44,9 @@ export const useUser = () => {
   );
 
   const logout = useCallback(() => {
+    removeCookie(TOKEN_COOKIE_NAME);
     setContext({ user: null });
-  }, [setContext]);
+  }, [removeCookie, setContext]);
 
   return {
     user: context.user,

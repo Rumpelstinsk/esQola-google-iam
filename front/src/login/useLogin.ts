@@ -1,6 +1,7 @@
 import { useCallback } from "react";
-import { LoginRepository, Response } from "../repositories";
+import { LoginRepository } from "../repositories";
 import { User } from "../models/user";
+import { Response } from "../models/responses";
 
 export const useLogin = () => {
   const login = useCallback(
