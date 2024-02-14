@@ -11,5 +11,11 @@ export const useSenders = () => {
     return SecuredRepository.send();
   }, []);
 
-  return { sendSecured };
+  const sendSecuredMiddleware = useCallback(async (): Promise<
+    Response<SecuredMessage>
+  > => {
+    return SecuredRepository.sendMiddleware();
+  }, []);
+
+  return { sendSecured, sendSecuredMiddleware };
 };

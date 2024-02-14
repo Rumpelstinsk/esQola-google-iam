@@ -19,4 +19,21 @@ export class SecuredRepository {
       return { error: "Unknown exception" };
     }
   }
+
+  static async sendMiddleware(): Promise<Response<SecuredMessage>> {
+    try {
+      const response = await fetch(`${API_URL}/private/root`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      const responseData = await response.json();
+      return response.ok
+        ? responseData
+        : { error: responseData.detail ?? "Unknown error" };
+    } catch {
+      return { error: "Unknown exception" };
+    }
+  }
 }
