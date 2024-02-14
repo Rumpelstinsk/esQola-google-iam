@@ -13,14 +13,11 @@ class ValidateJWTMiddleware(BaseHTTPMiddleware):
     async def dispatch(
         self, request: Request, call_next: RequestResponseEndpoint
     ) -> Response:
-        print("estoy en el middleware!!!!!!")
         jwt_token = request.cookies.get(JWT_COOKIE_NAME)
         if jwt_token is None:
             raise HTTPException(status_code=404, detail="YOU SHALL NOT PASS!!")
 
-        print("a ver que pasa")
         request.state.user = decode_jwt_token(jwt_token)
-        print(request.state.user)
         return await call_next(request)
 
 
